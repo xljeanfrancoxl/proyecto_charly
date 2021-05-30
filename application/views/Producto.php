@@ -109,7 +109,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">Stock de productos</h1>
+                    <h1 class="h3 mb-2 text-gray-800">hola charly charly</h1>
                         <div class="row" style="justify-content: flex-start">
                          <div class="" style="   " >
                             <button data-toggle="modal" data-target="#modal_producto" type="button" class=" btn btn-success" >           
