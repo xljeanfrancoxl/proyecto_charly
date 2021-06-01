@@ -23,7 +23,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = '';
+// $config['base_url'] = '';
 
 /*
 |--------------------------------------------------------------------------
@@ -36,7 +36,9 @@ $config['base_url'] = '';
 |
 */
 $config['index_page'] = 'index.php';
-
+# VALIDACION PUERTO SERVIDOR LOCAL..
+$port_actual = $_SERVER['HTTP_HOST'];
+$config['base_url'] = "http://".$port_actual."/almacen/";
 /*
 |--------------------------------------------------------------------------
 | URI PROTOCOL

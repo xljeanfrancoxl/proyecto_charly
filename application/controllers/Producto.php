@@ -6,15 +6,17 @@ class Producto extends CI_Controller {
 	 public function __construct(){
         parent::__construct();
 
-        //$this->load->library(array('session','email','form_validation','upload'));
+        $this->load->library(array('session','email','form_validation','upload'));
        
-        //$this->load->helper(array('url','form'));
+        $this->load->helper(array('url','form'));
         
     }
 	public function index()
-	{
+	{   
+        $this->load->helper(array('url','form'));
 		$this->load->model(array('M_welcome'));
 		//$data['nom_producto'] = $this->M_welcome->listar_producto();
+        $data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Producto | Admin';
 		$data['producto'] = $this->M_welcome->get_v_detalle();
 		$this->load->view('Producto',$data);
@@ -64,6 +66,19 @@ class Producto extends CI_Controller {
             };
         }
 	}
+
+    public function deleteProduct(){
+        $this->load->model(array('M_welcome'));
+        $this->load->helper(array('url','form'));
+       
+        if ($this->input->is_ajax_request()) {
+            $info=$this->M_welcome->delete_producto_x_tienda($this->input->post());
+            echo json_encode($info);
+        }else{
+            show_404();
+        }
+       // $this->M_welcome->delete_producto_x_tienda($id);
+    }
 	// public function agregar_producto($data){
 	// 	$this->load->model(array('M_welcome'));
 	// 	 if($this->M_welcome->actualizo_producto($data)){

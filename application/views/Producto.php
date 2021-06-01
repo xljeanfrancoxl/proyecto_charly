@@ -12,16 +12,16 @@
     <title>SB Admin 2 - Tables</title>
 
     <!-- Custom fonts for this template -->
-    <link href="../vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
+    <link href="<?=$base_url?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
     <link
         href="https://fonts.googleapis.com/css?family=Nunito:200,200i,300,300i,400,400i,600,600i,700,700i,800,800i,900,900i"
         rel="stylesheet">
 
     <!-- Custom styles for this template -->
-    <link href="../css/sb-admin-2.min.css" rel="stylesheet">
+    <link href="<?=$base_url?>css/sb-admin-2.min.css" rel="stylesheet">
 
     <!-- Custom styles for this page -->
-    <link href="../vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
+    <link href="<?=$base_url?>vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
    
 </head>
 
@@ -109,7 +109,7 @@
                 <div class="container-fluid">
 
                     <!-- Page Heading -->
-                    <h1 class="h3 mb-2 text-gray-800">hola ...........................................</h1>
+                    <h1 class="h3 mb-2 text-gray-800">Listado de stock de productos</h1>
                         <div class="row" style="justify-content: flex-start">
                          <div class="" style="   " >
                             <button data-toggle="modal" data-target="#modal_producto" type="button" class=" btn btn-success" >           
@@ -164,8 +164,10 @@
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
                                             <td>
                                                 <button data-toggle="modal" data-target="#modal_stock_producto" type="button" class=" btn btn-info" >detalle</button>                                                
-                                                
-                                                <button type="button" class="btn btn-danger">eliminar</button>
+                                                <!-- <a href="editData/<?= $recor_producto['Id_producto'] ?>"><i class="far fa-edit"></i>eliminar</a> -->
+                                                <!-- <button style="border: none; background-color: transparent; color: #007bff;" onclick="deleteProduct(<?=$recor_producto['Id_producto']?>)"><i class="fas fa-trash-alt"></i></button> -->
+                                                <button style="border: none; background-color: transparent; color: #007bff;"id="eliminar-producto" ids="<?=$recor_producto['Id_producto']?>"><i class="fas fa-trash-alt"></i></button>
+                                                <!-- <button type="button" class="btn btn-danger">eliminar</button> -->
                                             </td>
                                             
                                         </tr>
@@ -477,27 +479,83 @@
         </div>
     </div>
     <!-- Bootstrap core JavaScript-->
-    <script src="../vendor/jquery/jquery.min.js"></script>
-    <script src="../vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <script src="<?=$base_url?>vendor/jquery/jquery.js"></script>
+    <script src="<?=$base_url?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
     <!-- Core plugin JavaScript-->
-    <script src="../vendor/jquery-easing/jquery.easing.min.js"></script>
+    <script src="<?=$base_url?>vendor/jquery-easing/jquery.easing.min.js"></script>
 
     <!-- Custom scripts for all pages-->
-    <script src="../js/sb-admin-2.min.js"></script>
+    <script src="<?=$base_url?>js/sb-admin-2.min.js"></script>
 
     <!-- Page level plugins -->
-    <script src="../vendor/datatables/jquery.dataTables.min.js"></script>
-    <script src="../vendor/datatables/dataTables.bootstrap4.min.js"></script>
-
+    <script src="<?=$base_url?>vendor/datatables/jquery.dataTables.min.js"></script>
+    <script src="<?=$base_url?>vendor/datatables/dataTables.bootstrap4.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Page level custom scripts -->
-    <script src="../js/demo/datatables-demo.js"></script>
+    <script src="<?=$base_url?>js/demo/datatables-demo.js"></script>
     <script type="text/javascript">
-        function agregar__producto(evento) {
-            event.preventDefault();
+        // function agregar__producto(evento) {
+        //     event.preventDefault();
             
-          }
+        //   }
+        $(document).on('click','#eliminar-producto',function(e){ 
+            var Id_producto=$(this).attr("ids");
+            
+
+            Swal.fire({
+            title:"¿Estás seguro de que deseas eliminar este producto?",
+            //text: "You won't be able to revert this!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                url:'producto/deleteProduct',
+                method:'post',
+                data:{
+                    Id_producto:Id_producto
+                }
+            }).then(() => {
+            location.reload()
+            })
+            // .done(function(response){
+            //     console.log(response);
+            //     Swal.fire(               
+            //     'success'
+            //     )
+            // });
+            }
+            })
+           
+        });  
+        
+
+        // const deleteProduct = (id) => {
+
+        // Swal.fire({
+        // title: `¿Estás seguro de que deseas eliminar este producto?`,
+        // icon: 'info',
+        // showDenyButton: true,
+        // showCancelButton: false,
+        // confirmButtonText: `Sí, estoy seguro`,
+        // denyButtonText: `No, cancelar`,
+        // }).then((result) => {
+        // if (result.isConfirmed) {
+        //     $.ajax({
+        //         url: `deleteProduct/${id}`,
+        //         method: 'DELETE'
+        //     }).then(() => {
+        //     location.reload()
+        //     })
+        // }
+        // })
+        // }
     </script>
+
 </body>
 
 </html>

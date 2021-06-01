@@ -24,5 +24,16 @@ class M_welcome extends CI_Model
 		$this->db->insert('producto',$data);
         return true;
 	}
+	function delete_producto_x_tienda($post){
+	
+
+		$data=array(
+			'Estado_prod'=>0
+		);
+			
+			$this->db->where('Id_producto', $post['Id_producto']);	
+		return $this->db->update('producto',$data);
+	}
+			
 }
 
