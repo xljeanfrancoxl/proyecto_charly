@@ -13,7 +13,7 @@ class Welcome extends CI_Controller {
     }
 	public function index()
 	{
-		
+		$data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Almacen | Admin';
 		$this->load->view('welcome_message',$data);
 	}
