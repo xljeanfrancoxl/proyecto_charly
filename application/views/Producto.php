@@ -163,9 +163,12 @@
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
                                             <td>
-                                                <button data-toggle="modal" data-target="#modal_stock_producto" type="button" class=" btn btn-info" >detalle</button>                                                
+                                                <!-- <button data-toggle="modal" data-target="#modal_stock_producto" type="button" class=" btn btn-info" >detalle</button>                                                 -->
                                                 <!-- <a href="editData/<?= $recor_producto['Id_producto'] ?>"><i class="far fa-edit"></i>eliminar</a> -->
                                                 <!-- <button style="border: none; background-color: transparent; color: #007bff;" onclick="deleteProduct(<?=$recor_producto['Id_producto']?>)"><i class="fas fa-trash-alt"></i></button> -->
+                                                
+                                                <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button>
+                                                <button style="border: none; background-color: transparent; color: #007bff;"id="editar-producto" idsec="<?=$recor_producto['Id_producto']?>"><i class="fas fa-edit"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="eliminar-producto" ids="<?=$recor_producto['Id_producto']?>"><i class="fas fa-trash-alt"></i></button>
                                                 <!-- <button type="button" class="btn btn-danger">eliminar</button> -->
                                             </td>
@@ -444,7 +447,7 @@
             </div>
         </div>
     </div>
-     <div class="modal  fade fullscreen-modal" id="modal_actualizar_producto" tabindex="-1" role="dialog" aria-labelledby="modal_actualizar_producto"  aria-hidden="true" >
+    <div class="modal  fade fullscreen-modal" id="modal_actualizar_producto" tabindex="-1" role="dialog" aria-labelledby="modal_actualizar_producto"  aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content modal-lg-12">
                 <div class="modal-header">
@@ -478,6 +481,52 @@
             </div>
         </div>
     </div>
+    <!-- modal para editar producto -->
+    <div class="modal fade fullscreen-modal " id="modal_ventana" tabindex="-1" role ="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">EDITAR PRODUCTO</h5>
+                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">×</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form action="producto/edit_producto" id="form_edit_listaproducto" method="POST" role="form" class="form-horizontal">
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label for="edit_nomproducto"  class="col-sm-2 col-form-label">Nombre:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text"  class="form-control-plaintext"name="edit_nomproducto" id="edit_nomproducto" value="" placeholder="agregar">
+                                    </div>                                
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group row">
+                                    <div class="col-3">
+                                        <label for="edit_preproducto"  class="col-sm-2 col-form-label">Precio:</label>
+                                    </div>
+                                    <div class="col-9">
+                                        <input type="text"  class="form-control-plaintext"name="edit_preproducto" id="edit_preproducto" placeholder="agregar">
+                                    </div> 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                <button type="button" id="btn_guardar_editar" class="btn btn-primary">Save changes</button>
+            </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap core JavaScript-->
     <script src="<?=$base_url?>vendor/jquery/jquery.js"></script>
     <script src="<?=$base_url?>vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
@@ -501,8 +550,6 @@
         //   }
         $(document).on('click','#eliminar-producto',function(e){ 
             var Id_producto=$(this).attr("ids");
-            
-
             Swal.fire({
             title:"¿Estás seguro de que deseas eliminar este producto?",
             //text: "You won't be able to revert this!",
@@ -532,28 +579,30 @@
             })
            
         });  
-        
+        $(document).on('click','#editar-producto',function(e){
+            e.preventDefault(); 
+            var Id_producto =$(this).attr("idsec");            
+            $.ajax({
+    		type: 'post',
+            url:"producto/traer_datos_modal_editarproducto",                               
+            data: 
+            {
+            	Id_producto:Id_producto
+            }
+            }).done(function(respuesta){
+                var content = JSON.parse(respuesta);
+                console.log(respuesta)
+                // alert(content[0].Nom_producto)
+                // console.log(respuesta[0].Nom_producto);               
+                $('#form_edit_listaproducto input[id=edit_nomproducto]').val(content[0].Nom_producto);
+                $('#form_edit_listaproducto input[id=edit_preproducto]').val(content[0].Precio_prod);
+            $('#modal_ventana').modal();
+            });
+        });  
 
-        // const deleteProduct = (id) => {
+        $(document).on('click','#editar-producto',function(e){
 
-        // Swal.fire({
-        // title: `¿Estás seguro de que deseas eliminar este producto?`,
-        // icon: 'info',
-        // showDenyButton: true,
-        // showCancelButton: false,
-        // confirmButtonText: `Sí, estoy seguro`,
-        // denyButtonText: `No, cancelar`,
-        // }).then((result) => {
-        // if (result.isConfirmed) {
-        //     $.ajax({
-        //         url: `deleteProduct/${id}`,
-        //         method: 'DELETE'
-        //     }).then(() => {
-        //     location.reload()
-        //     })
-        // }
-        // })
-        // }
+        });
     </script>
 
 </body>

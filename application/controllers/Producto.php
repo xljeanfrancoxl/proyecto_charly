@@ -7,14 +7,14 @@ class Producto extends CI_Controller {
         parent::__construct();
 
         $this->load->library(array('session','email','form_validation','upload'));
-       
+        $this->load->model(array('M_welcome'));
         $this->load->helper(array('url','form'));
         
     }
 	public function index()
 	{   
         $this->load->helper(array('url','form'));
-		$this->load->model(array('M_welcome'));
+		// $this->load->model(array('M_welcome'));
 		//$data['nom_producto'] = $this->M_welcome->listar_producto();
         $data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Producto | Admin';
@@ -23,7 +23,7 @@ class Producto extends CI_Controller {
 	}
 
 	public function add_nuevo_proveedor(){
-		$this->load->model(array('M_welcome'));
+		// $this->load->model(array('M_welcome'));
         $this->load->library(array('form_validation')); //opcionales
         $this->load->helper(array('url','form')); //opcionales
         $this->form_validation->set_rules('add_name','','required');
@@ -66,10 +66,19 @@ class Producto extends CI_Controller {
             };
         }
 	}
-
+    public function traer_datos_modal_editarproducto(){
+       // $this->load->model(array('M_welcome'));
+        // $this->load->helper(array('url','form'));
+        if($this->input->is_ajax_request()){
+            $info=$this->M_welcome->m_traer_datos_modal_editarproducto($this->input->post('Id_producto'));
+            echo json_encode($info);
+        }else{
+            show_404();
+        }
+    }
     public function deleteProduct(){
-        $this->load->model(array('M_welcome'));
-        $this->load->helper(array('url','form'));
+        // $this->load->model(array('M_welcome'));
+        // $this->load->helper(array('url','form'));
        
         if ($this->input->is_ajax_request()) {
             $info=$this->M_welcome->delete_producto_x_tienda($this->input->post());
