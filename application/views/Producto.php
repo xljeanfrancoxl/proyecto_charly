@@ -497,19 +497,27 @@
                         <div class="row">
                             <div class="col-6">
                                 <div class="form-group row">
-                                    <div class="col-3">
-                                        <label for="edit_nomproducto"  class="col-sm-2 col-form-label">Nombre:</label>
-                                    </div>
-                                    <div class="col-9">
+                                    <label for="edit_nomproducto"  class="col-sm-4 col-form-label">Nombre:</label>
+                                    <div class="col-8">
                                         <input type="text"  class="form-control-plaintext"name="edit_nomproducto" id="edit_nomproducto" value="" placeholder="agregar">
+                                    </div>                                
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_cantproducto"  class="col-sm-8 col-form-label">cantidad de producto:</label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  class="form-control-plaintext"name="edit_cantproducto" id="edit_cantproducto" value="" placeholder="agregar">
+                                    </div>                                
+                                </div>
+                                <div class="form-group row">
+                                    <label for="edit_descproducto"  class="col-sm-8 col-form-label">descripcion del producto:</label>
+                                    <div class="col-sm-4">
+                                        <input type="text"  class="form-control-plaintext"name="edit_descproducto" id="edit_descproducto" value="" placeholder="agregar">
                                     </div>                                
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group row">
-                                    <div class="col-3">
-                                        <label for="edit_preproducto"  class="col-sm-2 col-form-label">Precio:</label>
-                                    </div>
+                                    <label for="edit_preproducto"  class="col-sm-8 col-form-label">Precio:</label>
                                     <div class="col-9">
                                         <input type="text"  class="form-control-plaintext"name="edit_preproducto" id="edit_preproducto" placeholder="agregar">
                                     </div> 
@@ -593,9 +601,11 @@
                 var content = JSON.parse(respuesta);
                 console.log(respuesta)
                 // alert(content[0].Nom_producto)
-                // console.log(respuesta[0].Nom_producto);               
+                // console.log(respuesta[0].Nom_producto); edit_descproducto              
                 $('#form_edit_listaproducto input[id=edit_nomproducto]').val(content[0].Nom_producto);
                 $('#form_edit_listaproducto input[id=edit_preproducto]').val(content[0].Precio_prod);
+                $('#form_edit_listaproducto input[id=edit_cantproducto]').val(content[0].Cant_prod);
+                $('#form_edit_listaproducto input[id=edit_descproducto]').val(content[0].Descripcion);
             $('#modal_ventana').modal();
             });
         });  
