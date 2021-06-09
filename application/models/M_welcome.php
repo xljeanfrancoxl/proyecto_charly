@@ -31,6 +31,11 @@ class M_welcome extends CI_Model
 			$this->db->where('Id_producto', $post['Id_producto']);	
 		return $this->db->update('producto',$data);
 	}
+	function m_traer_listado_proveedores(){
+				 $this->db->select('Id_proveedor,Nombre_prove');
+		 return  $this->db->get('proveedores') -> result_array();
+		 
+	}
 	function m_traer_datos_modal_editarproducto($Id_producto){
 		$data=array(
 			'Id_producto' => $Id_producto

@@ -363,10 +363,13 @@
                                        
                                         <div class="col-6">
                                             <select id="add_proveedor" name="add_proveedor"class="form-select" aria-label="Default select example">
+                                              
                                               <option selected>ELIGE LA OPCION</option>
-                                              <option value="1">jeanfranco</option>
-                                              <option value="2">neysier </option>
-                                              <option value="3">Pepito Grillo</option>
+                                                <?php
+                                                foreach ($lista_provedor as $lista_provedors) {
+                                                ?>
+                                                <option value="<?= $lista_provedors['Id_proveedor']?>"><?= $lista_provedors['Nombre_prove']?></option>
+                                                <?php }?>
                                             </select>
                                         </div>
                                     </div>

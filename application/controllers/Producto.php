@@ -18,6 +18,8 @@ class Producto extends CI_Controller {
 		//$data['nom_producto'] = $this->M_welcome->listar_producto();
         $data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Producto | Admin';
+        $data['lista_provedor']=$this->M_welcome->m_traer_listado_proveedores();
+       
 		$data['producto'] = $this->M_welcome->get_v_detalle();
 		$this->load->view('Producto',$data);
 	}
