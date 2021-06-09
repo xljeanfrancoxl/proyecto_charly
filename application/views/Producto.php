@@ -304,7 +304,7 @@
     <!-- modal para agregar producto -->
     <div  class="modal  fade fullscreen-modal" id="modal_producto" tabindex="-1" role="dialog" aria-labelledby="modal_producto"
         aria-hidden="true" >
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
+        <div class="modal-dialog modal-xl " role="document">
             <div class="modal-content modal-lg">
                 <form action="producto/add_nuevo_producto" method="POST" role="form" class="form-horizontal">
                     <div class="modal-header">
@@ -318,36 +318,37 @@
                             <div class="row ">
                                 <div class="col-lg-6">
                                     <div class="form-group  row">
-                                        <div class="col-3">
-                                            <label for="add_nombre"  class="col-sm-2 col-form-label">Nombre:</label>
-                                        </div>
-                                        <div class="col-9">
+                                        
+                                        <label for="add_nombre"  class="col-sm-6 col-form-label">Nombre:</label>
+                                        
+                                        <div class="col-6">
                                             <input type="text"  class="form-control-plaintext"name="add_nombre" id="add_nombre" placeholder="agregar">
                                         </div>
                                     </div>
                                     <div class="form-group  row">
-                                        <div class="col-3">
-                                            <label for="add_precio" class="col-sm-2 col-form-label">Precio:</label>
-                                        </div>
+                                        
+                                        <label for="add_precio" class="col-sm-6 col-form-label">Precio:</label>
+                                        
                                         <div class="col-6">
                                             <input type="text"  class="form-control-plaintext"name="add_precio" id="add_precio" placeholder="agregar">
                                         </div>
                                     </div>
                                     <div class="form-group row">
-                                        <div class="col-3">
-                                            <label for="add_cantidad"  class="col-sm-2 col-form-label">Cantidad:</label>
-                                        </div>
-                                        <div class="col-9">
+                                        
+                                        <label for="add_cantidad"  class="col-sm-6 col-form-label">Cantidad:</label>
+                                        
+                                        <div class="col-6">
                                             <input type="text"  class="form-control-plaintext" name="add_cantidad" id="add_cantidad" placeholder="agregar">
                                         </div>
                                     </div>
+                                    
                                 </div>
                                 <div class="col-lg-6">
                                     <div class="form-group row">
-                                        <div class="col-3">
-                                            <label for="add_marca"  class="col-sm-2 col-form-label">MARCA:</label>
-                                        </div>
-                                        <div class="col-9">
+                                        
+                                        <label for="add_marca"  class="col-sm-6 col-form-label">MARCA:</label>
+                                        
+                                        <div class="col-6">
                                             <select id="add_marca" name="add_marca"class="form-select" aria-label="Default select example">
                                               <option selected>ELIGE OPCION</option>
                                               <option value="1">TRU.VISIONS</option>
@@ -356,11 +357,24 @@
                                             </select>
                                         </div>
                                     </div>
-                                     <div class="form-group row">
-                                        <div class="col-3">
-                                            <label for="add_ubicacion"  class="col-sm-2 col-form-label">UBICACION:</label>
+                                    <div class="form-group row">
+                                        
+                                        <label for="add_proveedor"  class="col-sm-6 col-form-label">PROVEEDOR:</label>
+                                       
+                                        <div class="col-6">
+                                            <select id="add_proveedor" name="add_proveedor"class="form-select" aria-label="Default select example">
+                                              <option selected>ELIGE LA OPCION</option>
+                                              <option value="1">jeanfranco</option>
+                                              <option value="2">neysier </option>
+                                              <option value="3">Pepito Grillo</option>
+                                            </select>
                                         </div>
-                                        <div class="col-9">
+                                    </div>
+                                     <div class="form-group row">
+                                        
+                                        <label for="add_ubicacion"  class="col-sm-6 col-form-label">UBICACION:</label>
+                                        
+                                        <div class="col-6">
                                             <select id="add_ubicacion" name="add_ubicacion"class="form-select" aria-label="Default select example">
                                               <option selected>ELEGIR OPCION</option>
                                               <option value="1">ESTANTE 1</option>
@@ -371,10 +385,10 @@
                                     </div>
 
                                     <div class="form-group row">
-                                        <div class="col-3">
-                                            <label for="add_categoria"  class="col-sm-2 col-form-label">CATEGORIA:</label>
-                                        </div>
-                                        <div class="col-5">
+                                        
+                                        <label for="add_categoria"  class="col-sm-6 col-form-label">CATEGORIA:</label>
+                                        
+                                        <div class="col-6">
                                             <select id="add_categoria" name="add_categoria"class="form-select" aria-label="Default select example">
                                               <option selected>ELEGIR OPCION</option>
                                               <option value="HERRAMIENTA">HERRAMIENTA</option>

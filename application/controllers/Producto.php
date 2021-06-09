@@ -58,6 +58,7 @@ class Producto extends CI_Controller {
                 "Ubicacion" => $this->input->post('add_ubicacion'),
                 "nom_categoria" => $this->input->post('add_categoria'),
                 "Descripcion" => $this->input->post('add_descripcion'),
+                "Id_proveedor" => $this->input->post('add_proveedor'),
                 "Estado_prod" => 1
             );
 
