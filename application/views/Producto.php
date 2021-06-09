@@ -368,7 +368,7 @@
                                                 <?php
                                                 foreach ($lista_provedor as $lista_provedors) {
                                                 ?>
-                                                <option value="<?= $lista_provedors['Id_proveedor']?>"><?= $lista_provedors['Nombre_prove']?></option>
+                                                <option value="<?= $lista_provedors['Id_proveedor']?>"><?= $lista_provedors['Nom_proveedor']?></option>
                                                 <?php }?>
                                             </select>
                                         </div>
