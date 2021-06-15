@@ -140,20 +140,6 @@
                                            
                                         </tr>
                                     </thead>
-                                    <!-- <tfoot>
-                                        <tr>
-                                            <th>Nro</th>
-                                            <th>Nombre del producto</th>
-                                            <th>categoria</th>
-                                            <th>precio</th>
-                                            <th>Stock</th>
-                                            <th>proveedor</th>
-                                            <th>ingreso</th>
-                                            <th>salida</th>
-                                            <th>opciones</th>
-                                         
-                                        </tr>
-                                    </tfoot> -->
                                     <tbody>
                                 <?php foreach($producto as $recor_producto){?>
                                         <tr>
@@ -163,14 +149,9 @@
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
                                             <td>
-                                                <!-- <button data-toggle="modal" data-target="#modal_stock_producto" type="button" class=" btn btn-info" >detalle</button>                                                 -->
-                                                <!-- <a href="editData/<?= $recor_producto['Id_producto'] ?>"><i class="far fa-edit"></i>eliminar</a> -->
-                                                <!-- <button style="border: none; background-color: transparent; color: #007bff;" onclick="deleteProduct(<?=$recor_producto['Id_producto']?>)"><i class="fas fa-trash-alt"></i></button> -->
-                                                
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="editar-producto" idsec="<?=$recor_producto['Id_producto']?>"><i class="fas fa-edit"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="eliminar-producto" ids="<?=$recor_producto['Id_producto']?>"><i class="fas fa-trash-alt"></i></button>
-                                                <!-- <button type="button" class="btn btn-danger">eliminar</button> -->
                                             </td>
                                             
                                         </tr>
@@ -418,6 +399,7 @@
             </div>
         </div>
     </div>
+    <!-- modal para detalle producto -->
     <div class="modal  fade fullscreen-modal" id="modal_stock_producto" tabindex="-1" role="dialog" aria-labelledby="modal_stock_producto"  aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content modal-lg-12">
@@ -428,7 +410,7 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                    <table class="table table-bordered" id="dtdetalle" width="100%" cellspacing="0">
                         <thead>
                             <tr>
                                 <th>Nro</th>
@@ -458,12 +440,12 @@
                     </table>
                 </div>
                 <div class="modal-footer">
-                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                    <a class="btn btn-primary" href="login.html">Logout</a>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>                    
                 </div>
             </div>
         </div>
     </div>
+
     <div class="modal  fade fullscreen-modal" id="modal_actualizar_producto" tabindex="-1" role="dialog" aria-labelledby="modal_actualizar_producto"  aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content modal-lg-12">
@@ -627,8 +609,11 @@
             });
         });  
 
-        $(document).on('click','#editar-producto',function(e){
-
+        $(document).on('click','#detalle-producto',function(e){
+            e.preventDefault();
+            var Id_producto =$(this).attr("idsec");
+            $('#modal_stock_producto').modal();
+            $('#dtdetalle').DataTable();
         });
     </script>
 
