@@ -31,6 +31,20 @@ class M_welcome extends CI_Model
 			$this->db->where('Id_producto', $post['Id_producto']);	
 		return $this->db->update('producto',$data);
 	}
+	function m_getagregar_productos($post){
+		$data=array(
+			'cant_prod'=>$post['cantidadactual']
+		);			
+			$this->db->where('Id_producto', $post['Id_producto']);	
+		return $this->db->update('producto',$data);
+	}
+	function ingreso_producto_x_tienda($post){
+		$data=array(
+			'Cant_prod'=>$post['']
+		);			
+			$this->db->where('Id_producto', $post['Id_producto']);	
+		return $this->db->update('producto',$data);
+	}
 	function m_traer_listado_proveedores(){
 				 $this->db->select('Id_proveedor,Nom_proveedor');
 		 return  $this->db->get('proveedor') -> result_array();
@@ -43,6 +57,15 @@ class M_welcome extends CI_Model
 				//$this->db->where('Id_producto', $post['Id_producto']);	
 		$query = $this->db->get_where('producto', $data);
 		return $query->result_array();
+	}
+	function get_edit_lista_producto($post){
+				
+				$this->db->set('Nom_producto', $post['Nom_producto']);
+				$this->db->set('Precio_prod', $post['Precio_prod']);
+				$this->db->set('Cant_prod', $post['Cant_prod']);
+				$this->db->set('Descripcion', $post['Descripcion']);
+				$this->db->where('Id_producto', $post['idProdOc']);	
+		$query =$this->db->update('producto');	
 	}		
 }
 

@@ -31,7 +31,7 @@
     <div id="wrapper">
 
         <!-- Sidebar -->
-        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion" id="accordionSidebar">
+        <ul class="navbar-nav bg-gradient-primary sidebar sidebar-dark accordion toggled" id="accordionSidebar">
 
             <!-- Sidebar - Brand -->
             <a class="sidebar-brand d-flex align-items-center justify-content-center" href="index.html">
@@ -116,9 +116,8 @@
                             agregar producto</button>&nbsp&nbsp&nbsp
                             <button data-toggle="modal" data-target="#modal_proveedor" type="button" class=" btn btn-success" >           
                             agregar proveedor</button>
-                            <button data-toggle="modal"  data-target="#modal_actualizar_producto" type="button" class="btn btn-success">Actualizar</button>
                             <!-- <a class="dropdown-item" href="#" data-toggle="modal" data-target="#modal_proveedor"><button type="button" class="btn btn-success">           
-                            agregar proovedor</button></a> -->
+                            agregar proovedor</button></a>"-->
                          </div>
                         </div>
                         <!-- <button type="button" class="btn btn-success">agregar producto</button> -->
@@ -134,7 +133,9 @@
                                             <th>Nro</th>
                                             <th>Nombre </th>
                                             <th>categoria </th>
-                                            <th>precio unitario</th>
+                                            <th>precio</th>
+                                            <th>Ingreso</th>
+                                            <th>Salida</th>
                                             <th>Total</th>
                                             <th>opciones</th>
                                            
@@ -148,6 +149,8 @@
                                             <td><?= $recor_producto['nom_categoria'] ?></td>
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
+                                            <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>" cdprodagre="<?=$recor_producto['Precio_prod']?>" >Ingreso</button></td>
+                                            <td><button id="salida_producto" idsal="<?=$recor_producto['Id_producto']?>" data-toggle="modal"  data-target="#modal_salida_producto" class="btn btn-danger">salida</button></td>
                                             <td>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="editar-producto" idsec="<?=$recor_producto['Id_producto']?>"><i class="fas fa-edit"></i></button>
@@ -446,91 +449,116 @@
         </div>
     </div>
 
-    <div class="modal  fade fullscreen-modal" id="modal_actualizar_producto" tabindex="-1" role="dialog" aria-labelledby="modal_actualizar_producto"  aria-hidden="true" >
-        <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
-            <div class="modal-content modal-lg-12">
+    <!-- modal para editar producto -->
+    <div class="modal fade fullscreen-modal " id="modal_ventana" tabindex="-1" role ="dialog" aria-hidden="true">
+        <div class="modal-dialog modal-lg ">
+            <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Actualizar de productos</h5>
+                    <h5 class="modal-title">EDITAR PRODUCTO</h5>
                     <button class="close" type="button" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                   <div>
-                        producto<select>     
-                            <?php foreach($producto as $recor_producto){?>                                
-                              <option value='<?= $recor_producto["Id_producto"] ?>'><?= $recor_producto["Nom_producto"] ?></option>  
-                            <?php }?>
-                        </select>  <br><br>
-                        proveedor
-                        <select>
-                            <option>provedor 1</option>
-                        </select><br><br>
-                       <label>cantidad a agregar</label>
-                       <input type="number" name=""> <button id="agregar_producto" onclick="agregar__producto()" class="btn btn-secondary" type="">agregar</button><br><br>
-                       <label>cantidad a quitar</label> 
-                       <input type="number" name="">  <button id="quitar_producto" onclick="quitar__producto()" class="btn btn-secondary" type="">quitar</button>
-                      
-                   </div>
+                    <form action="producto/edit_producto" id="form_edit_listaproducto" method="POST" role="form" class="form-horizontal">
+                        <div class="container">
+                            <div class="row">
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <input type="text"  class="form-control-plaintext"name="idProdOc" id="idProdOc" value="" placeholder="" hidden>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="edit_nomproducto"  class="col-sm-4 col-form-label">Nombre:</label>
+                                        <div class="col-8">
+                                            <input type="text"  class="form-control-plaintext"name="edit_nomproducto" id="edit_nomproducto" value="" placeholder="agregar">
+                                        </div>                                
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="edit_cantproducto"  class="col-sm-8 col-form-label">cantidad de producto:</label>
+                                        <div class="col-sm-4">
+                                            <input type="text"  class="form-control-plaintext"name="edit_cantproducto" id="edit_cantproducto" value="" placeholder="agregar">
+                                        </div>                                
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="edit_descproducto"  class="col-sm-8 col-form-label">descripcion del producto:</label>
+                                        <div class="col-sm-4">
+                                            <input type="text"  class="form-control-plaintext"name="edit_descproducto" id="edit_descproducto" value="" placeholder="agregar">
+                                        </div>                                
+                                    </div>
+                                </div>
+                                <div class="col-6">
+                                    <div class="form-group row">
+                                        <label for="edit_preproducto"  class="col-sm-8 col-form-label">Precio:</label>
+                                        <div class="col-9">
+                                            <input type="text"  class="form-control-plaintext"name="edit_preproducto" id="edit_preproducto" placeholder="agregar">
+                                        </div> 
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                   
+                    <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
+                    <button type="button" id="btn_guardar_editar" class="btn btn-primary">Save changes</button>
                 </div>
             </div>
         </div>
     </div>
-    <!-- modal para editar producto -->
-    <div class="modal fade fullscreen-modal " id="modal_ventana" tabindex="-1" role ="dialog" aria-hidden="true">
-        <div class="modal-dialog modal-lg ">
+    <!-- MODAL PARA INGRESO PRODUCTO  -->
+    <div class="modal fade example-modal-sm" id="modal_ingreso_producto"tabindex="-1" role ="dialog"  aria-labelledby="modal_ingreso_producto" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
             <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title">EDITAR PRODUCTO</h5>
-                <button class="close" type="button" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">×</span>
-                </button>
+                <div class="modal-header">
+                    <p class="modal-title">INGRESAR PRODUCTO</p>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="producto/edit_producto" id="for_add_pod" method="POST" role="form">
+                        <div class="container-fluid row">
+                           
+                                <input type="number" id="agridProdOc" name="agridProdOc" hidden>
+                                <input type="number" id="agredit_cantproducto"  name="agredit_preproducto" hidden>
+                                <div class="col-md-12 d-flex justify-content-center">NOMBRE DEL PRODUCTO</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input type="number" id="cantidad_prod" name="cantidad_prod"> </div>
+                           
+                        </div>                   
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_agregar_producto" class="btn btn-primary">Aceptar</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
-            <div class="modal-body">
-                <form action="producto/edit_producto" id="form_edit_listaproducto" method="POST" role="form" class="form-horizontal">
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="edit_nomproducto"  class="col-sm-4 col-form-label">Nombre:</label>
-                                    <div class="col-8">
-                                        <input type="text"  class="form-control-plaintext"name="edit_nomproducto" id="edit_nomproducto" value="" placeholder="agregar">
-                                    </div>                                
-                                </div>
-                                <div class="form-group row">
-                                    <label for="edit_cantproducto"  class="col-sm-8 col-form-label">cantidad de producto:</label>
-                                    <div class="col-sm-4">
-                                        <input type="text"  class="form-control-plaintext"name="edit_cantproducto" id="edit_cantproducto" value="" placeholder="agregar">
-                                    </div>                                
-                                </div>
-                                <div class="form-group row">
-                                    <label for="edit_descproducto"  class="col-sm-8 col-form-label">descripcion del producto:</label>
-                                    <div class="col-sm-4">
-                                        <input type="text"  class="form-control-plaintext"name="edit_descproducto" id="edit_descproducto" value="" placeholder="agregar">
-                                    </div>                                
-                                </div>
+        </div>
+    </div>
+    <!-- MODAL PARA SALIDA PRODUCTO  -->
+    <div class="modal fade example-modal-sm"id="modal_salida_producto"tabindex="-1" role ="dialog"  aria-labelledby="modal_salida_producto" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered modal-sm">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <p class="modal-title">SALIDA PRODUCTO</p>
+                    <button class="close" type="button" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">×</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form action="">
+                        <div class="container-fluid">
+                            <div class="row ">
+                                <div class="col-md-12 d-flex justify-content-center">SALIDA DEL PRODUCTO</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input type="number" name=""> </div>
                             </div>
-                            <div class="col-6">
-                                <div class="form-group row">
-                                    <label for="edit_preproducto"  class="col-sm-8 col-form-label">Precio:</label>
-                                    <div class="col-9">
-                                        <input type="text"  class="form-control-plaintext"name="edit_preproducto" id="edit_preproducto" placeholder="agregar">
-                                    </div> 
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
-                <!-- <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button> -->
-                <button type="button" id="btn_guardar_editar" class="btn btn-primary">Save changes</button>
-            </div>
+                        </div>                   
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="btn_salida_editar" class="btn btn-primary">Aceptar</button>
+                    <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
+                </div>
             </div>
         </div>
     </div>
@@ -576,12 +604,71 @@
             }).then(() => {
             location.reload()
             })
-            // .done(function(response){
-            //     console.log(response);
-            //     Swal.fire(               
-            //     'success'
-            //     )
-            // });
+            
+            }
+            })
+           
+        });  
+        // ingreso producto
+
+        $(document).on('click','#ingreso_producto',function(e){ 
+            e.preventDefault();
+            var Id_producto=$(this).attr("ident");            
+            $.ajax({
+    		type: 'post',
+            url:"producto/traer_datos_modal_editarproducto",                               
+            data:  { 	Id_producto:Id_producto    }
+            }).always(function(respuesta){
+                var resultado = JSON.parse(respuesta);
+                $('#for_add_pod input[id=agridProdOc]').val(resultado[0].Id_producto);
+                $('#for_add_pod input[id=agredit_cantproducto]').val(resultado[0].Cant_prod);               
+                $('#modal_ingreso_producto').modal();
+            });
+        });  
+        // actualizar el ingreso del producto
+        $(document).on('click','#btn_agregar_producto',function(e){
+            var Id_producto=$("#agridProdOc").val();
+            var Cant_prod_agregar=$("#agredit_cantproducto").val();
+            var cant_modal=$("#cantidad_prod").val();
+            var cantidadactual= parseFloat(Cant_prod_agregar) + parseFloat(cant_modal);
+            $.ajax({
+                type: 'post',
+                url:"producto/agregar_productos",                               
+                data:  { 	
+                    Id_producto:Id_producto,
+                    cantidadactual:cantidadactual
+                    }
+            }).always(function(respuesta){
+            console.log(respuesta);		
+            location.reload()  
+            // $("#modal_ingreso_producto").closeModal();
+            
+            });
+         });
+         
+        // salida producto
+        $(document).on('click','#salida_producto',function(e){ 
+            var Id_producto=$(this).attr("ident");
+            Swal.fire({
+            title:"¿Estás seguro de que deseas ingresar un producto?",
+            //text: "You won't be able to revert this!",
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Si, eliminalo!'
+            }).then((result) => {
+            if (result.isConfirmed) {
+                $.ajax({
+                url:'producto/deleteProduct',
+                method:'post',
+                data:{
+                    Id_producto:Id_producto
+                }
+            }).then(() => {
+            location.reload()
+            })
+            
             }
             })
            
@@ -601,6 +688,7 @@
                 console.log(respuesta)
                 // alert(content[0].Nom_producto)
                 // console.log(respuesta[0].Nom_producto); edit_descproducto              
+                $('#form_edit_listaproducto input[id=idProdOc]').val(content[0].Id_producto);
                 $('#form_edit_listaproducto input[id=edit_nomproducto]').val(content[0].Nom_producto);
                 $('#form_edit_listaproducto input[id=edit_preproducto]').val(content[0].Precio_prod);
                 $('#form_edit_listaproducto input[id=edit_cantproducto]').val(content[0].Cant_prod);
@@ -608,6 +696,31 @@
             $('#modal_ventana').modal();
             });
         });  
+        $(document).on('click','#btn_guardar_editar',function(e){
+            e.preventDefault();
+            var idProdOc       = $("#idProdOc").val();
+            var Nom_producto   = $("#edit_nomproducto").val();
+            var Precio_prod    = $("#edit_preproducto").val();
+            var Cant_prod      = $("#edit_cantproducto").val();
+            var Descripcion    = $("#edit_descproducto").val();
+            $.ajax({
+    		type: 'post',
+            url:"producto/editlistaproducto",                               
+            data: {
+            	idProdOc:idProdOc,
+            	Nom_producto:Nom_producto,
+            	Precio_prod:Precio_prod,
+            	Cant_prod:Cant_prod,
+            	Descripcion:Descripcion
+            }
+
+    	}).always(function(respuesta){
+		console.log(respuesta);		
+
+		   $("#modal_edit_lista_tienda").closeModal();
+		   
+	    });
+        });
 
         $(document).on('click','#detalle-producto',function(e){
             e.preventDefault();

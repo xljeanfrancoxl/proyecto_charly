@@ -91,6 +91,34 @@ class Producto extends CI_Controller {
         }
        // $this->M_welcome->delete_producto_x_tienda($id);
     }
+    public function agregar_productos(){
+        if ($this->input->is_ajax_request()) {
+            $info=$this->M_welcome->m_getagregar_productos($this->input->post());
+            echo json_encode($info);
+        }else{
+            show_404();
+        }  
+    }
+    public function ingresoProduct(){
+        // $this->load->model(array('M_welcome'));
+        // $this->load->helper(array('url','form'));
+       
+        if ($this->input->is_ajax_request()) {
+            $info=$this->M_welcome->ingreso_producto_x_tienda($this->input->post());
+            echo json_encode($info);
+        }else{
+            show_404();
+        }
+       // $this->M_welcome->delete_producto_x_tienda($id);
+    }
+    public function editlistaproducto(){
+        if ($this->input->is_ajax_request()) {
+            $info=$this->M_welcome->get_edit_lista_producto($this->input->post());
+            echo json_encode($info);
+        }else{
+            show_404();
+        }
+    }
 	// public function agregar_producto($data){
 	// 	$this->load->model(array('M_welcome'));
 	// 	 if($this->M_welcome->actualizo_producto($data)){
