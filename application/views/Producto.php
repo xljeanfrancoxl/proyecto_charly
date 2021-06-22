@@ -134,9 +134,9 @@
                                             <th>Nombre </th>
                                             <th>categoria </th>
                                             <th>precio</th>
+                                            <th>Total</th>
                                             <th>Ingreso</th>
                                             <th>Salida</th>
-                                            <th>Total</th>
                                             <th>opciones</th>
                                            
                                         </tr>
@@ -522,7 +522,7 @@
                            
                                 <input type="number" id="agridProdOc" name="agridProdOc" hidden>
                                 <input type="number" id="agredit_cantproducto"  name="agredit_preproducto" hidden>
-                                <div class="col-md-12 d-flex justify-content-center">NOMBRE DEL PRODUCTO</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES HAS RECIBIDO ?</div> <br><br>
                                 <div class="col-md-12 d-flex justify-content-center"><input type="number" id="cantidad_prod" name="cantidad_prod"> </div>
                            
                         </div>                   
@@ -551,7 +551,7 @@
                             <div class="row ">
                                 <input type="number" id="salidProdOc" name="salidProdOc" hidden>
                                 <input type="number" id="salcantproducto"  name="salcantproducto" hidden>
-                                <div class="col-md-12 d-flex justify-content-center">SALIDA DEL PRODUCTO</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES VAS A DESPACHAR ?</div> <br><br>
                                 <div class="col-md-12 d-flex justify-content-center"><input type="number" id="can_pro_sal" name="can_pro_sal"> </div>
                             </div>
                         </div>                   
