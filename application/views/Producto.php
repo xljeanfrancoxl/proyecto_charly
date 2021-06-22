@@ -149,8 +149,8 @@
                                             <td><?= $recor_producto['nom_categoria'] ?></td>
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
-                                            <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>" cdprodagre="<?=$recor_producto['Precio_prod']?>" >Ingreso</button></td>
-                                            <td><button id="salida_producto" idsal="<?=$recor_producto['Id_producto']?>" data-toggle="modal"  data-target="#modal_salida_producto" class="btn btn-danger">salida</button></td>
+                                            <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>"  >Ingreso</button></td>
+                                            <td><button id="salida_producto" idsal="<?=$recor_producto['Id_producto']?>"  class="btn btn-danger">salida</button></td>
                                             <td>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="editar-producto" idsec="<?=$recor_producto['Id_producto']?>"><i class="fas fa-edit"></i></button>
@@ -419,23 +419,23 @@
                                 <th>Nro</th>
                                 <th>Nombre </th>
                                 <th>categoria </th>
+                                <th>Precio</th>
                                 <th>Proveedor</th>
                                 <th>Stock</th>
-                                <th>Ingreso</th>
-                                <th>Salida</th>
+                                
                                
                             </tr>
                         </thead>                                   
                         <tbody>
-                            <?php foreach($producto as $recor_producto){?>
+                            <?php foreach($listrepprov as $recor_producto){?>
                                 <tr>
                                     <td><?= $recor_producto['Id_producto'] ?></td>
                                     <td><?= $recor_producto['Nom_producto'] ?></td>
                                     <td><?= $recor_producto['nom_categoria'] ?></td>
                                     <td>S/<?= $recor_producto['Precio_prod'] ?></td>
+                                    <td><?= $recor_producto['Nom_proveedor'] ?></td>
                                     <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
-                                    <td>hola</td>
-                                    <td>hola</td>
+                                    
                                     
                                 </tr>
                             <?php }?>  
@@ -546,17 +546,19 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form action="">
+                    <form action="producto/edit_producto" id="for_sal_pod" method="POST" role="form">
                         <div class="container-fluid">
                             <div class="row ">
+                                <input type="number" id="salidProdOc" name="salidProdOc" hidden>
+                                <input type="number" id="salcantproducto"  name="salcantproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">SALIDA DEL PRODUCTO</div> <br><br>
-                                <div class="col-md-12 d-flex justify-content-center"><input type="number" name=""> </div>
+                                <div class="col-md-12 d-flex justify-content-center"><input type="number" id="can_pro_sal" name="can_pro_sal"> </div>
                             </div>
                         </div>                   
                     </form>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" id="btn_salida_editar" class="btn btn-primary">Aceptar</button>
+                    <button type="button" id="btn_salida_producto" class="btn btn-primary">Aceptar</button>
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                 </div>
             </div>
@@ -609,7 +611,7 @@
             })
            
         });  
-        // ingreso producto
+        // traer datos al modal ingreso producto
 
         $(document).on('click','#ingreso_producto',function(e){ 
             e.preventDefault();
@@ -646,33 +648,41 @@
             });
          });
          
-        // salida producto
+        // traer datos para el modal de salida producto
         $(document).on('click','#salida_producto',function(e){ 
-            var Id_producto=$(this).attr("ident");
-            Swal.fire({
-            title:"¿Estás seguro de que deseas ingresar un producto?",
-            //text: "You won't be able to revert this!",
-            icon: 'question',
-            showCancelButton: true,
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Si, eliminalo!'
-            }).then((result) => {
-            if (result.isConfirmed) {
-                $.ajax({
-                url:'producto/deleteProduct',
-                method:'post',
-                data:{
-                    Id_producto:Id_producto
-                }
-            }).then(() => {
-            location.reload()
-            })
-            
-            }
-            })
-           
+            var Id_producto=$(this).attr("idsal");
+            $.ajax({
+    		type: 'post',
+            url:"producto/traer_datos_modal_editarproducto",                               
+            data:  { 	Id_producto:Id_producto    }
+            }).always(function(respuesta){
+                var resultado = JSON.parse(respuesta);
+                $('#for_sal_pod input[id=salidProdOc]').val(resultado[0].Id_producto);
+                $('#for_sal_pod input[id=salcantproducto]').val(resultado[0].Cant_prod);               
+                $('#modal_salida_producto').modal();
+            });
         });  
+        // actualizar la salida del producto
+        $(document).on('click','#btn_salida_producto',function(e){
+            var Id_producto=$("#salidProdOc").val();
+            var Cant_prod_agregar=$("#salcantproducto").val();
+            var cant_modal=$("#can_pro_sal").val();
+            var cantidadactual= parseFloat(Cant_prod_agregar) - parseFloat(cant_modal);
+            
+            $.ajax({
+                type: 'post',
+                url:"producto/agregar_productos",                               
+                data:  { 	
+                    Id_producto:Id_producto,
+                    cantidadactual:cantidadactual
+                    }
+            }).always(function(respuesta){
+            console.log(respuesta);		
+            location.reload()  
+            // $("#modal_ingreso_producto").closeModal();
+            
+            });
+         });
         $(document).on('click','#editar-producto',function(e){
             e.preventDefault(); 
             var Id_producto =$(this).attr("idsec");            
@@ -716,8 +726,8 @@
 
     	}).always(function(respuesta){
 		console.log(respuesta);		
-
-		   $("#modal_edit_lista_tienda").closeModal();
+        location.reload()
+		//    $("#modal_edit_lista_tienda").modal('hide');
 		   
 	    });
         });

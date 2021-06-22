@@ -66,6 +66,13 @@ class M_welcome extends CI_Model
 				$this->db->set('Descripcion', $post['Descripcion']);
 				$this->db->where('Id_producto', $post['idProdOc']);	
 		$query =$this->db->update('producto');	
-	}		
+		return $query->result_array();
+	}	
+	function get_listrepprov(){
+				$this->db->join('proveedor', 'proveedor.Id_Proveedor = producto.Id_proveedor');
+				$this->db->where('Estado_prod', 1);		
+		$query =$this->db->get('producto');	
+		return $query->result_array();
+	}	
 }
 

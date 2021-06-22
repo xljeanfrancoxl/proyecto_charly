@@ -21,6 +21,8 @@ class Producto extends CI_Controller {
         $data['lista_provedor']=$this->M_welcome->m_traer_listado_proveedores();
        
 		$data['producto'] = $this->M_welcome->get_v_detalle();
+        $data['listrepprov'] = $this->M_welcome->get_listrepprov();
+        // var_dump($data['listrepprov']);
 		$this->load->view('Producto',$data);
 	}
 
