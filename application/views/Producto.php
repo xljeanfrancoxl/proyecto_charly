@@ -127,7 +127,7 @@
                     <div class="card shadow mb-4">
                         <div class="card-body">
                             <div class="table-responsive">
-                                <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+                                <table class="table table-bordered" id="ejemplo1" width="100%" cellspacing="0">
                                     <thead>
                                         <tr>
                                             <th>Nro</th>
@@ -580,11 +580,45 @@
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <!-- Page level custom scripts -->
     <script src="<?=$base_url?>js/demo/datatables-demo.js"></script>
+    
+    <script src="<?=$base_url ?>vendor/datatables-buttons/js/dataTables.buttons.min.js"></script>
+    <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.bootstrap4.min.js"></script>
+    <script src="<?=$base_url ?>vendor/jszip/jszip.min.js"></script>
+    <script src="<?=$base_url ?>vendor/pdfmake/pdfmake.min.js"></script>
+    <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.html5.min.js"></script>
+    <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.print.min.js"></script>
+    <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script type="text/javascript">
-        // function agregar__producto(evento) {
-        //     event.preventDefault();
+        $(function () {
+            $("#ejemplo1").DataTable({
+            "order": [[ 0, "desc" ]],
+            "dom": 'Bfrtip',
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                    "lengthMenu": "En grupos de _MENU_",
+                    "zeroRecords": "lo siento no se encontro datos",
+                    "info": "pagina _PAGE_ de _PAGES_ ",
+                    "infoEmpty": "no se encontraron datos",
+                    "infoFiltered": "(hay un total de _MAX_ datos)",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast":"Último",
+                        "sNext":"Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+                    
+                },     
+            "buttons": ["copy", "csv", "excel", "pdf", "print"]
             
-        //   }
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        
+        });
         $(document).on('click','#eliminar-producto',function(e){ 
             var Id_producto=$(this).attr("ids");
             Swal.fire({
