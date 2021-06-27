@@ -519,7 +519,6 @@
                 <div class="modal-body">
                     <form action="producto/edit_producto" id="for_add_pod" method="POST" role="form">
                         <div class="container-fluid row">
-                           
                                 <input type="number" id="agridProdOc" name="agridProdOc" hidden>
                                 <input type="number" id="agredit_cantproducto"  name="agredit_preproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES HAS RECIBIDO ?</div> <br><br>

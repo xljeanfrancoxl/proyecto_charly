@@ -8,6 +8,47 @@ class M_welcome extends CI_Model
 		$this->load->database();
 		date_default_timezone_set('America/Lima');
 	}
+
+	# VALIDACION LOGIN..
+	function login_validation($data){
+			$this->db->where('Email', $data['email']);
+			// $this->db->where('Password', $data['password']);
+	$q = $this->db->get('jam_usuario_tiendas');
+
+	if($q->num_rows() > 0){		
+		$user = $q->row();
+		# Validando password..
+		if(password_verify($data['password'], $user->Password)){
+			$this->session_user($user);
+			return TRUE;
+		}
+	}
+	return FALSE;
+	}
+	# APERTURA DE SESSION..
+	function session_user($user){
+		$data = array(
+			'is_logued_in_admin' 	=> 		TRUE,
+			'adm_id_usuario' 	=> 		$user->Id_usuario,
+			'adm_email'			=>		$user->Email,
+			'adm_password' 		=> 		$user->Contraseña,
+			'adm_nombre'		=> 		$user->Nombre,
+			'adm_apellido'		=> 		$user->Apellido_paterno,
+			'adm_foto_perfil' 	=>		$user->Foto_perfil
+			
+		);
+
+		$this->session->set_userdata($data);
+		return true;
+	}
+	function getDropSession($id){
+			$this->db->where('id', $id);
+		if( $this->db->delete('jam_ci_session')){
+			return TRUE;
+		}
+		return FALSE;
+	}
+
 	#traer los datos de productp
 	function get_v_detalle(){
 
