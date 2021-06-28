@@ -12,7 +12,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
     <meta name="description" content="">
     <meta name="author" content="">
 
-    <title>soy novato en php  </title>
+    <title>Almacen | Admin</title>
 
     <!-- Custom fonts for this template-->
     <link href="<?=$base_url?>vendor/fontawesome-free/css/all.min.css" rel="stylesheet" type="text/css">
@@ -71,7 +71,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
                                     <hr>
                                     
                                     <div class="text-center">
-                                        <a class="small" href="register.html">CREAR USUARIO!</a>
+                                        <!-- <a class="small" href="register.html">CREAR USUARIO!</a> -->
                                     </div>
                                 </div>
                             </div>

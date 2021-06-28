@@ -50,13 +50,14 @@ class Welcome extends CI_Controller {
             }
         }else{
             // $data['error'] = (validation_errors() != '') ? validation_errors(): $this->session->flashdata('error');
-            //$data['tienda_usuario']=$this->session->userdata('adm_tienda_id');
+            // $data['tienda_usuario']=$this->session->userdata('adm_tienda_id');
             $data['title'] = 'INCACLIC | Login Admin';
             $data['imagenes_ftp']=$this->config->item('imagenes_ftp');
             $data['base_url']=$this->config->item('base_url');
             // var_dump($data);
+			$data['title'] = 'Almacen | Admin';
             $this->load->view('login',$data);
-        // $this->load->view('admin/base/footer',$data);  
+       		// $this->load->view('admin/base/footer',$data);  
         }
     }
 	public function close_session(){
