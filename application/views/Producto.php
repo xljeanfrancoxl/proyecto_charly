@@ -333,6 +333,14 @@
                                             <input type="text"  class="form-control-plaintext" name="add_cantidad" id="add_cantidad" placeholder="agregar">
                                         </div>
                                     </div>
+                                    <div class="form-group row">
+                                        
+                                        <label for="add_cantidad"  class="col-sm-6 col-form-label">Guia de factura:</label>
+                                        
+                                        <div class="col-6">
+                                            <input type="text"  class="form-control-plaintext" name="add_guia" id="add_guia" placeholder="agregar">
+                                        </div>
+                                    </div>
                                     
                                 </div>
                                 <div class="col-lg-6">
