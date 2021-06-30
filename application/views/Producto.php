@@ -228,7 +228,7 @@
                                             <label for="add_name"  class="col-sm-2 col-form-label">NOMBRE:</label>
                                         </div>
                                         <div class="col-9">
-                                            <input type="text"  class="form-control-plaintext"name="add_name" id="add_name" placeholder="agregar">
+                                            <input type="text"  class="form-control-plaintext"name="add_name" id="add_name" placeholder="nombre">
                                         </div>
                                     </div>
                                     <div class="form-group  row">
@@ -236,7 +236,7 @@
                                             <label for="add_dni" class="col-sm-2 col-form-label">DNI:</label>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text"  class="form-control-plaintext"name="add_dni" id="add_dni" placeholder="agregar">
+                                            <input type="text"  class="form-control-plaintext"name="add_dni" id="add_dni" placeholder="dni">
                                         </div>
                                     </div>
                                     <div class="form-group row ">
@@ -244,7 +244,15 @@
                                             <label for="add_email" class="col-sm-2 col-form-label">EMAIL:</label>
                                         </div>
                                         <div class="col-6">
-                                            <input type="text"  class="form-control-plaintext"name="add_email" id="add_email" placeholder="agregar">
+                                            <input type="text"  class="form-control-plaintext"name="add_email" id="add_email" placeholder="email">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row ">
+                                        <div class="col-3">
+                                            <label for="add_guiaf" class="col-sm-2 col-form-label">GUIA DE FACTURA:</label>
+                                        </div>
+                                        <div class="col-6">
+                                            <input type="text"  class="form-control-plaintext"name="add_guiaf" id="add_guiaf" placeholder="guia de factura">
                                         </div>
                                     </div>
                                     <div class="form-group row ">
@@ -522,8 +530,9 @@
                                 <input type="number" id="agridProdOc" name="agridProdOc" hidden>
                                 <input type="number" id="agredit_cantproducto"  name="agredit_preproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES HAS RECIBIDO ?</div> <br><br>
-                                <div class="col-md-12 d-flex justify-content-center"><input type="number" id="cantidad_prod" name="cantidad_prod"> </div>
-                           
+                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="cantidad #N" type="number" id="cantidad_prod" name="cantidad_prod"> </div>                                
+                                <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE ENTREGA?</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div>
                         </div>                   
                     </form>
                 </div>
@@ -552,6 +561,8 @@
                                 <input type="number" id="salcantproducto"  name="salcantproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES VAS A DESPACHAR ?</div> <br><br>
                                 <div class="col-md-12 d-flex justify-content-center"><input type="number" id="can_pro_sal" name="can_pro_sal"> </div>
+                                <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE SALIDA?</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div>
                             </div>
                         </div>                   
                     </form>
