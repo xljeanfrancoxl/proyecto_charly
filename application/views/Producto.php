@@ -249,14 +249,6 @@
                                     </div>
                                     <div class="form-group row ">
                                         <div class="col-3">
-                                            <label for="add_guiaf" class="col-sm-2 col-form-label">GUIA DE FACTURA:</label>
-                                        </div>
-                                        <div class="col-6">
-                                            <input type="text"  class="form-control-plaintext"name="add_guiaf" id="add_guiaf" placeholder="guia de factura">
-                                        </div>
-                                    </div>
-                                    <div class="form-group row ">
-                                        <div class="col-3">
                                             <label for="add_razon_social" class="col-sm-2 col-form-label">RAZON SOCIAL:</label>
                                         </div>
                                         <div class="col-6">
