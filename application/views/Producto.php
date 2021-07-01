@@ -298,7 +298,7 @@
         aria-hidden="true" >
         <div class="modal-dialog modal-xl " role="document">
             <div class="modal-content modal-lg">
-                <form action="producto/add_nuevo_producto" method="POST" role="form" class="form-horizontal">
+                <form action="../producto/add_nuevo_producto" method="POST" role="form" class="form-horizontal">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modal_producto">Agregar producto</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
