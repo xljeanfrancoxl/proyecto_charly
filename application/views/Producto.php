@@ -650,7 +650,7 @@
             }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                url:'deleteProduct',
+                url:'producto/deleteProduct',
                 method:'post',
                 data:{
                     Id_producto:Id_producto
@@ -740,7 +740,7 @@
             var Id_producto =$(this).attr("idsec");            
             $.ajax({
     		type: 'post',
-            url:"traer_datos_modal_editarproducto",                               
+            url:"producto/traer_datos_modal_editarproducto",                               
             data: 
             {
             	Id_producto:Id_producto
@@ -767,7 +767,7 @@
             var Descripcion    = $("#edit_descproducto").val();
             $.ajax({
     		type: 'post',
-            url:"editlistaproducto",                               
+            url:"producto/editlistaproducto",                               
             data: {
             	idProdOc:idProdOc,
             	Nom_producto:Nom_producto,
