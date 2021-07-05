@@ -615,7 +615,7 @@
             }).then((result) => {
             if (result.isConfirmed) {
                 $.ajax({
-                url:'producto/deleteProduct',
+                url:'deleteProduct',
                 method:'post',
                 data:{
                     Id_producto:Id_producto
@@ -635,7 +635,7 @@
             var Id_producto=$(this).attr("ident");            
             $.ajax({
     		type: 'post',
-            url:"producto/traer_datos_modal_editarproducto",                               
+            url:"traer_datos_modal_editarproducto",                               
             data:  { 	Id_producto:Id_producto    }
             }).always(function(respuesta){
                 var resultado = JSON.parse(respuesta);
@@ -652,7 +652,7 @@
             var cantidadactual= parseFloat(Cant_prod_agregar) + parseFloat(cant_modal);
             $.ajax({
                 type: 'post',
-                url:"producto/agregar_productos",                               
+                url:"agregar_productos",                               
                 data:  { 	
                     Id_producto:Id_producto,
                     cantidadactual:cantidadactual
@@ -670,7 +670,7 @@
             var Id_producto=$(this).attr("idsal");
             $.ajax({
     		type: 'post',
-            url:"producto/traer_datos_modal_editarproducto",                               
+            url:"traer_datos_modal_editarproducto",                               
             data:  { 	Id_producto:Id_producto    }
             }).always(function(respuesta){
                 var resultado = JSON.parse(respuesta);
@@ -691,7 +691,7 @@
                 var cantidadactual= parseFloat(Cant_prod_agregar) - parseFloat(cant_modal);
                 $.ajax({
                     type: 'post',
-                    url:"producto/agregar_productos",                               
+                    url:"agregar_productos",                               
                     data:  { 	
                         Id_producto:Id_producto,
                         cantidadactual:cantidadactual
@@ -710,7 +710,7 @@
             var Id_producto =$(this).attr("idsec");            
             $.ajax({
     		type: 'post',
-            url:"producto/traer_datos_modal_editarproducto",                               
+            url:"traer_datos_modal_editarproducto",                               
             data: 
             {
             	Id_producto:Id_producto
@@ -737,7 +737,7 @@
             var Descripcion    = $("#edit_descproducto").val();
             $.ajax({
     		type: 'post',
-            url:"producto/editlistaproducto",                               
+            url:"editlistaproducto",                               
             data: {
             	idProdOc:idProdOc,
             	Nom_producto:Nom_producto,
@@ -800,7 +800,7 @@
         $('#creforpro').submit(function(e){
             e.preventDefault();
             $.ajax({
-                url:'producto/crateformproducto',
+                url:'crateformproducto',
                 data: $('#creforpro').serialize(),
                 type:"post",
                 async:false,
