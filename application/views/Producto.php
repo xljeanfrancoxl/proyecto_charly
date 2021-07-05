@@ -537,8 +537,8 @@
                                 <input type="number" id="agredit_cantproducto"  name="agredit_preproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES HAS RECIBIDO ?</div> <br><br>
                                 <div class="col-md-12 d-flex justify-content-center"><input placeholder="cantidad #N" type="number" id="cantidad_prod" name="cantidad_prod"> </div>                                
-                                <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE ENTREGA?</div> <br><br>
-                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div>
+                                <!-- <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE ENTREGA?</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div> -->
                         </div>                   
                     </form>
                 </div>
@@ -567,8 +567,8 @@
                                 <input type="number" id="salcantproducto"  name="salcantproducto" hidden>
                                 <div class="col-md-12 d-flex justify-content-center">CUANTAS UNIDADES VAS A DESPACHAR ?</div> <br><br>
                                 <div class="col-md-12 d-flex justify-content-center"><input type="number" id="can_pro_sal" name="can_pro_sal"> </div>
-                                <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE SALIDA?</div> <br><br>
-                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div>
+                                <!-- <div class="col-md-12 d-flex justify-content-center">INGRESE LA GUIA DE SALIDA?</div> <br><br>
+                                <div class="col-md-12 d-flex justify-content-center"><input placeholder="guia de remision" type="text" id="guia_ep" name="guia_ep"> </div> -->
                             </div>
                         </div>                   
                     </form>
