@@ -150,7 +150,6 @@
                                             <td><?= $recor_producto['Nom_producto'] ?></td>
                                             <td><?= $recor_producto['Cod_factura'] ?></td>
                                             <td><?= $recor_producto['Nom_proveedor'] ?></td>
-                                            <td><?= $recor_producto['Nom_producto'] ?></td>
                                             <td><?= $recor_producto['nom_categoria'] ?></td>
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
