@@ -19,7 +19,6 @@ class Producto extends CI_Controller {
         $data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Producto | Admin';
         $data['lista_provedor']=$this->M_welcome->m_traer_listado_proveedores();
-       
 		$data['producto'] = $this->M_welcome->get_v_detalle();
         $data['listrepprov'] = $this->M_welcome->get_listrepprov();
         // var_dump($data['listrepprov']);
@@ -47,33 +46,33 @@ class Producto extends CI_Controller {
             };
         }
 	}
-	public function add_nuevo_producto(){
-		$this->load->model(array('M_welcome'));
-        $this->load->library(array('form_validation')); //opcionales
-        $this->load->helper(array('url','form')); //opcionales
-        $this->form_validation->set_rules('add_nombre','','required');
-		if($this->form_validation->run() == TRUE){
-            $prod = array(
-				// "Id_proveedor" =>1,
-                "Nom_producto" => $this->input->post('add_nombre'),
-                "Precio_prod" => $this->input->post('add_precio'),
-                "Cant_prod" => $this->input->post('add_cantidad'),
-                "Id_marca" => $this->input->post('add_marca'),
-                "Ubicacion" => $this->input->post('add_ubicacion'),
-                "nom_categoria" => $this->input->post('add_categoria'),
-                "Descripcion" => $this->input->post('add_descripcion'),
-                "Id_proveedor" => $this->input->post('add_proveedor'),
-                "Estado_prod" => 1
-            );
+    
+	// public function add_nuevo_producto(){
+	// 	$this->load->model(array('M_welcome'));
+    //     $this->load->library(array('form_validation')); //opcionales
+    //     $this->load->helper(array('url','form')); //opcionales
+    //     $this->form_validation->set_rules('add_nombre','','required');
+	// 	if($this->form_validation->run() == TRUE){
+    //         $prod = array(
+	// 			// "Id_proveedor" =>1,
+    //             "Nom_producto" => $this->input->post('add_nombre'),
+    //             "Precio_prod" => $this->input->post('add_precio'),
+    //             "Cant_prod" => $this->input->post('add_cantidad'),
+    //             "Id_marca" => $this->input->post('add_marca'),
+    //             "Ubicacion" => $this->input->post('add_ubicacion'),
+    //             "nom_categoria" => $this->input->post('add_categoria'),
+    //             "Descripcion" => $this->input->post('add_descripcion'),
+    //             "Id_proveedor" => $this->input->post('add_proveedor'),
+    //             "Estado_prod" => 1
+    //         );
 
-            if($this->M_welcome->add_producto($prod)){
-                header('Location:/almacen/index.php/producto');
-            };
-        }
-	}
+    //         if($this->M_welcome->add_producto($prod)){
+    //             header('Location:/almacen/index.php/producto');
+    //         };
+    //     }
+	// }
     public function traer_datos_modal_editarproducto(){
-       // $this->load->model(array('M_welcome'));
-        // $this->load->helper(array('url','form'));
+      
         if($this->input->is_ajax_request()){
             $info=$this->M_welcome->m_traer_datos_modal_editarproducto($this->input->post('Id_producto'));
             echo json_encode($info);
@@ -82,8 +81,7 @@ class Producto extends CI_Controller {
         }
     }
     public function deleteProduct(){
-        // $this->load->model(array('M_welcome'));
-        // $this->load->helper(array('url','form'));
+        
        
         if ($this->input->is_ajax_request()) {
             $info=$this->M_welcome->delete_producto_x_tienda($this->input->post());
@@ -121,10 +119,31 @@ class Producto extends CI_Controller {
             show_404();
         }
     }
-	// public function agregar_producto($data){
-	// 	$this->load->model(array('M_welcome'));
-	// 	 if($this->M_welcome->actualizo_producto($data)){
- //                header('Location:/almacen/index.php/producto');
- //            };
-	// }
+	
+
+    public function crateformproducto(){
+		 $Nom_producto = $this->input->post('add_nombre');
+         $Precio_prod =$this->input->post('add_precio');
+         $Cant_prod =$this->input->post('add_cantidad');
+         $Id_marca =$this->input->post('add_marca');
+         $Ubicacion =$this->input->post('add_ubicacion');
+         $nom_categoria =$this->input->post('add_categoria');
+         $Descripcion =$this->input->post('add_descripcion');
+         $Id_proveedor =$this->input->post('add_proveedor');
+         $obj1 = array(
+            // "Id_proveedor" =>1,
+            "Nom_producto" => $Nom_producto,
+            "Precio_prod" => $Precio_prod,
+            "Cant_prod" => $Cant_prod,
+            "Id_marca" => $Id_marca,
+            "Ubicacion" => $Ubicacion,
+            "nom_categoria" => $nom_categoria,
+            "Descripcion" => $Descripcion,
+            "Id_proveedor" => $Id_proveedor,
+            "Estado_prod" => 1
+        );
+        $this->load->model('M_welcome');
+        $insert=$this->M_welcome->getcrateformproducto($obj1);
+        echo json_encode($insert);
+	}	
 }

@@ -290,7 +290,8 @@
         aria-hidden="true" >
         <div class="modal-dialog modal-xl " role="document">
             <div class="modal-content modal-lg">
-                <form action="../producto/add_nuevo_producto" method="POST" role="form" class="form-horizontal">
+                <!-- <form action="../producto/add_nuevo_producto" method="POST" role="form" class="form-horizontal"> -->
+                <form action="" id="creforpro" method="POST" role="form" class="form-horizontal">
                     <div class="modal-header">
                         <h5 class="modal-title" id="modal_producto">Agregar producto</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
@@ -481,12 +482,12 @@
                                             <input type="text"  class="form-control-plaintext"name="edit_nomproducto" id="edit_nomproducto" value="" placeholder="agregar">
                                         </div>                                
                                     </div>
-                                    <div class="form-group row">
+                                    <!-- <div class="form-group row">
                                         <label for="edit_cantproducto"  class="col-sm-8 col-form-label">cantidad de producto:</label>
                                         <div class="col-sm-4">
                                             <input type="text"  class="form-control-plaintext"name="edit_cantproducto" id="edit_cantproducto" value="" placeholder="agregar">
                                         </div>                                
-                                    </div>
+                                    </div> -->
                                     <div class="form-group row">
                                         <label for="edit_descproducto"  class="col-sm-8 col-form-label">descripcion del producto:</label>
                                         <div class="col-sm-4">
@@ -599,36 +600,8 @@
     <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.print.min.js"></script>
     <script src="<?=$base_url ?>vendor/datatables-buttons/js/buttons.colVis.min.js"></script>
     <script type="text/javascript">
-        $(function () {
-            $("#ejemplo1").DataTable({
-            "order": [[ 0, "desc" ]],
-            "dom": 'Bfrtip',
-            "paging": true,
-            "lengthChange": true,
-            "searching": false,
-            "ordering": true,
-            "info": true,
-            "autoWidth": false,
-            "responsive": true,
-            "language": {
-                    "lengthMenu": "En grupos de _MENU_",
-                    "zeroRecords": "lo siento no se encontro datos",
-                    "info": "pagina _PAGE_ de _PAGES_ ",
-                    "infoEmpty": "no se encontraron datos",
-                    "infoFiltered": "(hay un total de _MAX_ datos)",
-                    "oPaginate": {
-                        "sFirst": "Primero",
-                        "sLast":"Último",
-                        "sNext":"Siguiente",
-                        "sPrevious": "Anterior"
-                    }
-                    
-                },     
-            "buttons": ["copy", "csv", "excel", "pdf", "print"]
-            
-            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+      
         
-        });
         $(document).on('click','#eliminar-producto',function(e){ 
             var Id_producto=$(this).attr("ids");
             Swal.fire({
@@ -711,21 +684,26 @@
             var Id_producto=$("#salidProdOc").val();
             var Cant_prod_agregar=$("#salcantproducto").val();
             var cant_modal=$("#can_pro_sal").val();
-            var cantidadactual= parseFloat(Cant_prod_agregar) - parseFloat(cant_modal);
-            
-            $.ajax({
-                type: 'post',
-                url:"producto/agregar_productos",                               
-                data:  { 	
-                    Id_producto:Id_producto,
-                    cantidadactual:cantidadactual
-                    }
-            }).always(function(respuesta){
-            console.log(respuesta);		
-            location.reload()  
-            // $("#modal_ingreso_producto").closeModal();
-            
-            });
+            if(cant_modal>Cant_prod_agregar){
+               alert("Alerta No Tienes esa cantidad ");
+               return;
+            }else{
+                var cantidadactual= parseFloat(Cant_prod_agregar) - parseFloat(cant_modal);
+                $.ajax({
+                    type: 'post',
+                    url:"producto/agregar_productos",                               
+                    data:  { 	
+                        Id_producto:Id_producto,
+                        cantidadactual:cantidadactual
+                        }
+                }).always(function(respuesta){
+                console.log(respuesta);	
+                $('#modal_ingreso_producto').modal('hide');	
+                location.reload()  
+                // $("#modal_ingreso_producto").closeModal();
+                
+                });
+             }
          });
         $(document).on('click','#editar-producto',function(e){
             e.preventDefault(); 
@@ -744,7 +722,7 @@
                 // console.log(respuesta[0].Nom_producto); edit_descproducto              
                 $('#form_edit_listaproducto input[id=idProdOc]').val(content[0].Id_producto);
                 $('#form_edit_listaproducto input[id=edit_nomproducto]').val(content[0].Nom_producto);
-                $('#form_edit_listaproducto input[id=edit_preproducto]').val(content[0].Precio_prod);
+                // $('#form_edit_listaproducto input[id=edit_preproducto]').val(content[0].Precio_prod);1
                 $('#form_edit_listaproducto input[id=edit_cantproducto]').val(content[0].Cant_prod);
                 $('#form_edit_listaproducto input[id=edit_descproducto]').val(content[0].Descripcion);
             $('#modal_ventana').modal();
@@ -782,6 +760,66 @@
             $('#modal_stock_producto').modal();
             $('#dtdetalle').DataTable();
         });
+        $(function () {
+            $("#ejemplo1").DataTable({
+            // "ajax": {
+            //     url : "/listar_prod",               
+            //     "type":"post",
+            //     "cache": false,
+            //     "dataSrc": ""
+            // },
+            "order": [[ 0, "desc" ]],
+            "dom": 'Bfrtip',
+            "paging": true,
+            "lengthChange": true,
+            "searching": false,
+            "serverSide": false,
+            "ordering": true,
+            "info": true,
+            "autoWidth": false,
+            "responsive": true,
+            "language": {
+                    "lengthMenu": "En grupos de _MENU_",
+                    "zeroRecords": "lo siento no se encontro datos",
+                    "info": "pagina _PAGE_ de _PAGES_ ",
+                    "infoEmpty": "no se encontraron datos",
+                    "infoFiltered": "(hay un total de _MAX_ datos)",
+                    "oPaginate": {
+                        "sFirst": "Primero",
+                        "sLast":"Último",
+                        "sNext":"Siguiente",
+                        "sPrevious": "Anterior"
+                    }
+                    
+                },     
+            "buttons": ["copy", "csv", "excel", "pdf", "print"]
+            
+            }).buttons().container().appendTo('#example1_wrapper .col-md-6:eq(0)');
+        
+        });
+        $('#creforpro').submit(function(e){
+            e.preventDefault();
+            $.ajax({
+                url:'producto/crateformproducto',
+                data: $('#creforpro').serialize(),
+                type:"post",
+                async:false,
+                datatype:'json',
+                success:function(data){
+                    console.log(data);
+                    $('#modal_producto').modal('hide');
+                    document.getElementById('creforpro').reset();
+                    // $('#creforpro').reset();
+                    alert("ingreso correctamente");
+                    location.reload(1)
+                    // $('#').DataTable().ajax.reload();
+                },
+                error: function(){
+                    $('#ejemplo1').DataTable().ajax.reload();
+                    alert("error")
+                }
+            });
+        })
     </script>
 
 </body>

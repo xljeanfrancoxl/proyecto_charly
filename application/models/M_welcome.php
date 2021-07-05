@@ -48,7 +48,13 @@ class M_welcome extends CI_Model
 		}
 		return FALSE;
 	}
+	// function get_datos(){
+	// 	$this->db->where('Estado_prod', 1);		
+	// $query =$this->db->get('producto');	
 
+	// return $query;
+	
+	// }
 	#traer los datos de productp
 	function get_v_detalle(){
 
@@ -114,6 +120,10 @@ class M_welcome extends CI_Model
 				$this->db->where('Estado_prod', 1);		
 		$query =$this->db->get('producto');	
 		return $query->result_array();
-	}	
+	}
+	function getcrateformproducto($data){
+		$query =$this->db->insert('producto',$data);
+        return $query;
+	}
 }
 
