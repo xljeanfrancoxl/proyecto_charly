@@ -216,7 +216,7 @@
         aria-hidden="true" >
         <div class="modal-dialog modal-lg modal-dialog-centered" role="document">
             <div class="modal-content modal-lg">
-                <form action="producto/add_nuevo_proveedor" method="POST" role="form" class="form-horizontal">
+                <form action="add_nuevo_proveedor" method="POST" role="form" class="form-horizontal">
                     <div class="modal-header">
                         <h5 class="modal-title" id="exampleModalLabel">Agregar proveedor</h5>
                         <button class="close" type="button" data-dismiss="modal" aria-label="Close">
