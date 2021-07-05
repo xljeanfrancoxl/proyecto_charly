@@ -42,7 +42,7 @@ class Producto extends CI_Controller {
             );
 
             if($this->M_welcome->add_proveedores($prod)){
-                header('Location:/almacen/index.php/producto');
+                header('Location:/almacen/index.php/producto/index');
             };
         }
 	}
