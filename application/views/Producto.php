@@ -132,6 +132,8 @@
                                         <tr>
                                             <th>Nro</th>
                                             <th>Nombre </th>
+                                            <th>Guia</th>
+                                            <th>Proveedor</th>
                                             <th>categoria </th>
                                             <th>precio</th>
                                             <th>Total</th>
@@ -146,13 +148,16 @@
                                         <tr>
                                             <td><?= $recor_producto['Id_producto'] ?></td>
                                             <td><?= $recor_producto['Nom_producto'] ?></td>
+                                            <td><?= $recor_producto['Cod_factura'] ?></td>
+                                            <td><?= $recor_producto['Nom_proveedor'] ?></td>
+                                            <td><?= $recor_producto['Nom_producto'] ?></td>
                                             <td><?= $recor_producto['nom_categoria'] ?></td>
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
                                             <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>"  >Ingreso</button></td>
                                             <td><button id="salida_producto" idsal="<?=$recor_producto['Id_producto']?>"  class="btn btn-danger">salida</button></td>
                                             <td>
-                                                <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button>
+                                                <!-- <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button> -->
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="editar-producto" idsec="<?=$recor_producto['Id_producto']?>"><i class="fas fa-edit"></i></button>
                                                 <button style="border: none; background-color: transparent; color: #007bff;"id="eliminar-producto" ids="<?=$recor_producto['Id_producto']?>"><i class="fas fa-trash-alt"></i></button>
                                             </td>

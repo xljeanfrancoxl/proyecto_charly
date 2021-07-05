@@ -58,8 +58,11 @@ class M_welcome extends CI_Model
 	#traer los datos de productp
 	function get_v_detalle(){
 
-		    $this->db->where('Estado_prod', 1);		
-	$query =$this->db->get('producto');	
+		    $this->db->where('Estado_prod', 1);	
+			$this->db->select('*');    
+			$this->db->from('producto');
+			$this->db->join('proveedor', 'producto.id_proveedor = proveedor.Id_Proveedor');	
+	$query =$this->db->get();	
 
 	return $query->result_array();
 	}

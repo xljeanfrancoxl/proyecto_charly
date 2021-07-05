@@ -19,7 +19,7 @@ class Producto extends CI_Controller {
         $data['base_url']=$this->config->item('base_url');
 		$data['title'] = 'Producto | Admin';
         $data['lista_provedor']=$this->M_welcome->m_traer_listado_proveedores();
-		$data['producto'] = $this->M_welcome->get_v_detalle();
+		$data['producto'] = $this->M_welcome->get_v_detalle();        
         $data['listrepprov'] = $this->M_welcome->get_listrepprov();
         // var_dump($data['listrepprov']);
 		$this->load->view('Producto',$data);
@@ -130,6 +130,7 @@ class Producto extends CI_Controller {
          $nom_categoria =$this->input->post('add_categoria');
          $Descripcion =$this->input->post('add_descripcion');
          $Id_proveedor =$this->input->post('add_proveedor');
+         $Cod_factura=$this->input->post('add_guia');
          $obj1 = array(
             // "Id_proveedor" =>1,
             "Nom_producto" => $Nom_producto,
@@ -140,6 +141,7 @@ class Producto extends CI_Controller {
             "nom_categoria" => $nom_categoria,
             "Descripcion" => $Descripcion,
             "Id_proveedor" => $Id_proveedor,
+            "Cod_factura"=>$Cod_factura,
             "Estado_prod" => 1
         );
         $this->load->model('M_welcome');
