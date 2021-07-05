@@ -153,7 +153,7 @@
                                             <td><?= $recor_producto['nom_categoria'] ?></td>
                                             <td>S/<?= $recor_producto['Precio_prod'] ?></td>
                                             <td><?= $prueba= $recor_producto['Cant_prod']?></td>                                            
-                                            <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>"  >Ingreso</button></td>
+                                            <td><button id="ingreso_producto"class="btn btn-primary" ident="<?=$recor_producto['Id_producto']?>"  >Incremento</button></td>
                                             <td><button id="salida_producto" idsal="<?=$recor_producto['Id_producto']?>"  class="btn btn-danger">salida</button></td>
                                             <td>
                                                 <!-- <button style="border: none; background-color: transparent; color: #007bff;"id="detalle-producto" idse="<?=$recor_producto['Id_producto']?>"><i class="fas fa-book"></i></button> -->
@@ -203,7 +203,7 @@
                         <span aria-hidden="true">×</span>
                     </button>
                 </div>
-                <div class="modal-body">Select "Logout" below if you are ready to end your current session.</div>
+                <div class="modal-body">Seleccione "Cerrar sesión" a continuación si está listo para finalizar su sesión actual.</div>
                 <div class="modal-footer">
                     <button class="btn btn-secondary" type="button" data-dismiss="modal">Cancel</button>
                     <a class="btn btn-primary" href="../welcome/close_session">Logout</a>
