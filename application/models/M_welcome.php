@@ -96,7 +96,7 @@ class M_welcome extends CI_Model
 		return $this->db->update('producto',$data);
 	}
 	function m_traer_listado_proveedores(){
-				 $this->db->select('Id_proveedor,Nom_proveedor');
+				 $this->db->select('Id_proveedor,Nom_proveedor,Dni_proveedor,Email_proveedor,Razon_social_proveedor,Ruc_proveedor,Telefono_proveedor');
 		 return  $this->db->get('proveedor') -> result_array();
 		 
 	}
@@ -127,6 +127,11 @@ class M_welcome extends CI_Model
 	function getcrateformproducto($data){
 		$query =$this->db->insert('producto',$data);
         return $query;
+	}
+	function get_list_cat(){
+				
+		$query =$this->db->get('categoria');
+        return $query->result_array();
 	}
 }
 

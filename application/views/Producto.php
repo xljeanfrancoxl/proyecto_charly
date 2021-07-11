@@ -50,7 +50,16 @@
                     <i class="fas fa-fw fa-tachometer-alt"></i>
                     <span>Lista de productos</span></a>
             </li>
-
+            <li class="nav-item">
+                <a class="nav-link" href="<?=$base_url?>categoria/index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Lista de categoria</span></a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" href="<?=$base_url?>proveedores/index">
+                    <i class="fas fa-fw fa-tachometer-alt"></i>
+                    <span>Lista de proveedores</span></a>
+            </li>
             <!-- Sidebar Toggler (Sidebar) -->
             <div class="text-center d-none d-md-inline">
                 <button class="rounded-circle border-0" id="sidebarToggle"></button>
